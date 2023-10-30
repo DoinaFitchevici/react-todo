@@ -11,10 +11,9 @@ function AddTodoForm(props) {
   const handleAddTodo = (event) => {
     event.preventDefault();
     console.log(event.target);
-
     console.log("value is", todoTitle);
-    props.onAddTodo(todoTitle);
-    event.target.reset();
+    props.onAddTodo({ title: todoTitle, id: Date.now() });
+    setTodoTitle("");
   };
   return (
     <form onSubmit={handleAddTodo}>
