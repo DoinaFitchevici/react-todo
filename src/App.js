@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 
-function App() {
+const App = () => {
   const [todoList, setTodoList] = useState([]);
 
   const addTodo = (newTodo) => {
@@ -17,6 +17,6 @@ function App() {
       <TodoList todoList={todoList} />
     </div>
   );
-}
+};
 
 export default App;

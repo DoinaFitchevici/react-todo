@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function AddTodoForm({ onAddTodo }) {
+const AddTodoForm = ({ onAddTodo }) => {
   const [todoTitle, setTodoTitle] = useState("");
 
   const handleTitleChange = (event) => {
@@ -28,6 +28,6 @@ function AddTodoForm({ onAddTodo }) {
       <button type="submit">Add</button>
     </form>
   );
-}
+};
 
 export default AddTodoForm;
