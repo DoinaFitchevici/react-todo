@@ -38,12 +38,20 @@ const App = () => {
     setTodoList(newTodoList);
   };
 
+  const reorderTodo = (newTodoList) => {
+    setTodoList(newTodoList);
+  };
+
   return (
     <>
       <h1>Todo List</h1>
       <AddTodoForm onAddTodo={addTodo} />
       {isLoading && <p>Loading...</p>}
-      <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+      <TodoList
+        todoList={todoList}
+        onRemoveTodo={removeTodo}
+        onReorderTodo={reorderTodo}
+      />
     </>
   );
 };
