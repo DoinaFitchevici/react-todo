@@ -39,14 +39,39 @@ const App = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
-    }
-  }, [todoList]);
+  const addTodo = async (newTodo) => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+      body: JSON.stringify({
+        fields: {
+          title: newTodo.title,
+        },
+      }),
+    };
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error has occured: ${response.status}`);
+      }
 
-  const addTodo = (newTodo) => {
-    setTodoList([...todoList, newTodo]);
+      const dataResponse = await response.json();
+      console.log(dataResponse);
+
+      setTodoList((prevTodoList) => [
+        ...prevTodoList,
+        {
+          id: dataResponse.id,
+          title: dataResponse.fields.title,
+        },
+      ]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const removeTodo = (id) => {
