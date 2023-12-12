@@ -1,7 +1,12 @@
-const TodoListItem = ({ todo, onRemoveTodo }) => {
-  const { title, id } = todo;
+const TodoListItem = ({ todo, onRemoveTodo, onToggleCompletion }) => {
+  const { title, id, completed } = todo;
   return (
-    <li>
+    <li style={{ textDecoration: completed ? "line-through" : "none" }}>
+      <input
+        type="checkbox"
+        checked={completed}
+        onChange={() => onToggleCompletion(id)}
+      />
       {title}
       <span>
         &nbsp;

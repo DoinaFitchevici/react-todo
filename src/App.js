@@ -79,6 +79,18 @@ const App = () => {
     setTodoList(newTodoList);
   };
 
+  const toggleTodoCompletion = (id) => {
+    const updatedTodoList = todoList.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+
+    const sortedTodoList = updatedTodoList.sort((a, b) =>
+      a.completed === b.completed ? 0 : a.completed ? 1 : -1
+    );
+
+    setTodoList(sortedTodoList);
+  };
+
   const reorderTodo = (newTodoList) => {
     setTodoList(newTodoList);
   };
@@ -91,6 +103,7 @@ const App = () => {
       <TodoList
         todoList={todoList}
         onRemoveTodo={removeTodo}
+        onToggleCompletion={toggleTodoCompletion}
         onReorderTodo={reorderTodo}
       />
     </>

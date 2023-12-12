@@ -1,7 +1,12 @@
 import { useState } from "react";
 import TodoListItem from "./TodoListItem";
 
-const TodoList = ({ todoList, onRemoveTodo, onReorderTodo }) => {
+const TodoList = ({
+  todoList,
+  onRemoveTodo,
+  onToggleCompletion,
+  onReorderTodo,
+}) => {
   const [draggedTodoId, setDraggedTodoId] = useState(null);
 
   const handleDragStart = (event, id) => {
@@ -45,7 +50,11 @@ const TodoList = ({ todoList, onRemoveTodo, onReorderTodo }) => {
           onDragOver={(event) => handleDragOver(event)}
           onDrop={(event) => handleDrop(event, todoItem.id)}
         >
-          <TodoListItem todo={todoItem} onRemoveTodo={onRemoveTodo} />
+          <TodoListItem
+            todo={todoItem}
+            onRemoveTodo={onRemoveTodo}
+            onToggleCompletion={onToggleCompletion}
+          />
         </li>
       ))}
     </ul>
