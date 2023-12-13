@@ -26,6 +26,7 @@ const App = () => {
       const todos = data.records.map((todo) => ({
         title: todo.fields.title,
         id: todo.id,
+        completed: todo.fields.completed || false,
       }));
 
       setTodoList(todos);
@@ -67,6 +68,7 @@ const App = () => {
         {
           id: dataResponse.id,
           title: dataResponse.fields.title,
+          completed: dataResponse.fields.completed || false,
         },
       ]);
     } catch (error) {

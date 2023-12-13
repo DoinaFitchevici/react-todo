@@ -1,5 +1,6 @@
 const TodoListItem = ({ todo, onRemoveTodo, onToggleCompletion }) => {
   const { title, id, completed } = todo;
+
   return (
     <li style={{ textDecoration: completed ? "line-through" : "none" }}>
       <input
