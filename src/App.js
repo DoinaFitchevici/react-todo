@@ -21,7 +21,6 @@ const App = () => {
         throw new Error(`Error: ${response.status}`);
       }
       const data = await response.json();
-      console.log(data);
 
       const todos = data.records.map((todo) => ({
         title: todo.fields.title,
@@ -29,7 +28,12 @@ const App = () => {
         completed: todo.fields.completed || false,
       }));
 
-      setTodoList(todos);
+      const sortedTodoList = todos.sort((a, b) =>
+        a.completed === b.completed ? 0 : a.completed ? 1 : -1
+      );
+
+      setTodoList(sortedTodoList);
+
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -61,7 +65,6 @@ const App = () => {
       }
 
       const dataResponse = await response.json();
-      console.log(dataResponse);
 
       setTodoList((prevTodoList) => [
         ...prevTodoList,
@@ -71,6 +74,41 @@ const App = () => {
           completed: dataResponse.fields.completed || false,
         },
       ]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateTodo = async (newTodo) => {
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+      body: JSON.stringify({
+        fields: {
+          completed: newTodo.completed,
+        },
+      }),
+    };
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${newTodo.id}`;
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error has occured: ${response.status}`);
+      }
+
+      const dataResponse = await response.json();
+      console.log(dataResponse);
+      // setTodoList((prevTodoList) => [
+      //   ...prevTodoList,
+      //   {
+      //     id: dataResponse.id,
+      //     title: dataResponse.fields.title,
+      //     completed: dataResponse.fields.completed || false,
+      //   },
+      // ]);
     } catch (error) {
       console.log(error);
     }
@@ -91,6 +129,7 @@ const App = () => {
     );
 
     setTodoList(sortedTodoList);
+    updateTodo(sortedTodoList.find((itemTodo) => itemTodo.id === id));
   };
 
   const reorderTodo = (newTodoList) => {
