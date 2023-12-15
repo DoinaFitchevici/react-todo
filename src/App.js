@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 
+const sortByLastModifiedTime =
+  "?sort%5B0%5D%5Bfield%5D=lastModifiedTime&sort%5B0%5D%5Bdirection%5D=asc";
+
 const App = () => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +16,7 @@ const App = () => {
         Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
       },
     };
-    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}${sortByLastModifiedTime}`;
 
     try {
       const response = await fetch(url, options);
@@ -114,7 +117,31 @@ const App = () => {
     }
   };
 
+  const deleteTodo = async (id) => {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+    };
+
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${id}`;
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw new Error(`Error has occured: ${response.status}`);
+      }
+
+      const dataResponse = await response.json();
+      return dataResponse;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const removeTodo = (id) => {
+    deleteTodo(id);
     const newTodoList = todoList.filter((todo) => todo.id !== id);
     setTodoList(newTodoList);
   };
