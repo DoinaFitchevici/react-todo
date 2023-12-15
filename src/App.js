@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const sortByLastModifiedTime =
-  "?sort%5B0%5D%5Bfield%5D=lastModifiedTime&sort%5B0%5D%5Bdirection%5D=asc";
+  "?sort[0][field]=completed&sort[0][direction]=asc&sort[1][field]=lastModifiedTime&sort[1][direction]=asc";
+//"?sort%5B0%5D%5Bfield%5D=lastModifiedTime&sort%5B0%5D%5Bdirection%5D=asc";
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
@@ -164,17 +166,27 @@ const App = () => {
   };
 
   return (
-    <>
-      <h1>Todo List</h1>
-      <AddTodoForm onAddTodo={addTodo} />
-      {isLoading && <p>Loading...</p>}
-      <TodoList
-        todoList={todoList}
-        onRemoveTodo={removeTodo}
-        onToggleCompletion={toggleTodoCompletion}
-        onReorderTodo={reorderTodo}
-      />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <h1>Todo List</h1>
+              <AddTodoForm onAddTodo={addTodo} />
+              {isLoading && <p>Loading...</p>}
+              <TodoList
+                todoList={todoList}
+                onRemoveTodo={removeTodo}
+                onToggleCompletion={toggleTodoCompletion}
+                onReorderTodo={reorderTodo}
+              />
+            </>
+          }
+        />
+        <Route path="/new" element={<h1>New Todo List</h1>} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 export default App;
