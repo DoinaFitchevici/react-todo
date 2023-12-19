@@ -6,137 +6,98 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 const sortByLastModifiedTime =
   "?sort[0][field]=completed&sort[0][direction]=asc&sort[1][field]=lastModifiedTime&sort[1][direction]=asc";
 //"?sort%5B0%5D%5Bfield%5D=lastModifiedTime&sort%5B0%5D%5Bdirection%5D=asc";
+const baseUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchData = async () => {
-    const options = {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
-      },
-    };
-    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}${sortByLastModifiedTime}`;
-
+  const fetchApi = async ({ method, url, headers, body }) => {
     try {
+      setIsLoading(true);
+      const options = {
+        method: method,
+        headers: {
+          ...headers,
+          Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+        },
+        body: body ? JSON.stringify(body) : null,
+      };
+
       const response = await fetch(url, options);
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
       const data = await response.json();
+      setIsLoading(false);
+      return data;
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
+  };
 
+  const getTodos = async () => {
+    try {
+      const url = `${baseUrl}${sortByLastModifiedTime}`;
+      const data = await fetchApi({ method: "GET", url });
       const todos = data.records.map((todo) => ({
         title: todo.fields.title,
         id: todo.id,
         completed: todo.fields.completed || false,
       }));
 
-      const sortedTodoList = todos.sort((a, b) =>
-        a.completed === b.completed ? 0 : a.completed ? 1 : -1
-      );
-
-      setTodoList(sortedTodoList);
-
-      setIsLoading(false);
+      setTodoList(todos);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    getTodos();
   }, []);
 
   const addTodo = async (newTodo) => {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
-      },
-      body: JSON.stringify({
-        fields: {
-          title: newTodo.title,
-        },
-      }),
-    };
-    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
     try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error(`Error has occured: ${response.status}`);
-      }
+      const url = `${baseUrl}`;
+      const data = await fetchApi({
+        method: "POST",
+        url,
+        headers: { "Content-Type": "application/json" },
+        body: { fields: { title: newTodo.title } },
+      });
 
-      const dataResponse = await response.json();
-
-      setTodoList((prevTodoList) => [
-        ...prevTodoList,
-        {
-          id: dataResponse.id,
-          title: dataResponse.fields.title,
-          completed: dataResponse.fields.completed || false,
-        },
-      ]);
+      await getTodos();
     } catch (error) {
       console.log(error);
     }
   };
 
   const updateTodo = async (newTodo) => {
-    const options = {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
-      },
-      body: JSON.stringify({
-        fields: {
-          completed: newTodo.completed,
-        },
-      }),
-    };
-    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${newTodo.id}`;
     try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error(`Error has occured: ${response.status}`);
-      }
-
-      const dataResponse = await response.json();
-      console.log(dataResponse);
-      // setTodoList((prevTodoList) => [
-      //   ...prevTodoList,
-      //   {
-      //     id: dataResponse.id,
-      //     title: dataResponse.fields.title,
-      //     completed: dataResponse.fields.completed || false,
-      //   },
-      // ]);
+      const url = `${baseUrl}/${newTodo.id}`;
+      const data = await fetchApi({
+        method: "PATCH",
+        url,
+        headers: { "Content-Type": "application/json" },
+        body: { fields: { completed: newTodo.completed } },
+      });
+      await getTodos();
     } catch (error) {
       console.log(error);
     }
   };
 
   const deleteTodo = async (id) => {
-    const options = {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
-      },
-    };
-
-    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${id}`;
     try {
-      const response = await fetch(url, options);
-      if (!response.ok) {
-        throw new Error(`Error has occured: ${response.status}`);
-      }
+      const url = `${baseUrl}/${id}`;
+      const data = await fetchApi({
+        method: "DELETE",
+        url,
+        headers: { "Content-Type": "application/json" },
+      });
 
-      const dataResponse = await response.json();
-      return dataResponse;
+      return data;
     } catch (error) {
       console.log(error);
     }
