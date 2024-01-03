@@ -11,8 +11,6 @@ const AddTodoForm = ({ onAddTodo }) => {
 
   const handleAddTodo = (event) => {
     event.preventDefault();
-    console.log(event.target);
-    console.log("value is", todoTitle);
     onAddTodo({
       title: todoTitle,
       //id: Date.now()
