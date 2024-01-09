@@ -1,8 +1,14 @@
+import styles from "./TodoListItem.module.css";
+
 const TodoListItem = ({ todo, onRemoveTodo, onToggleCompletion }) => {
   const { title, id, completed } = todo;
 
   return (
-    <li style={{ textDecoration: completed ? "line-through" : "none" }}>
+    <li
+      className={
+        completed ? styles.ListItemCompleted : styles.ListItemNotCompleted
+      }
+    >
       <input
         type="checkbox"
         checked={completed}

@@ -1,0 +1,14 @@
+.ListItemCompleted {
+  color: red;
+  text-decoration: line-through;
+}
+
+.ListItemNotCompleted {
+  color: black;
+  text-decoration: none;
+}
+
+li {
+  padding: 5px;
+  margin: 5px;
+}

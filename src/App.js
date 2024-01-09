@@ -2,11 +2,19 @@ import { useState, useEffect } from "react";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import styled from "styled-components";
 
 const sortByLastModifiedTime =
   "?sort[0][field]=completed&sort[0][direction]=asc&sort[1][field]=lastModifiedTime&sort[1][direction]=asc";
 //"?sort%5B0%5D%5Bfield%5D=lastModifiedTime&sort%5B0%5D%5Bdirection%5D=asc";
 const baseUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
+
+const Heading = styled.h1`
+  width: 50%;
+  margin: 0 auto;
+  font-size: 2.2em;
+  color: #333300;
+`;
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
@@ -133,7 +141,7 @@ const App = () => {
           path="/"
           element={
             <>
-              <h1>Todo List</h1>
+              <Heading>Todo List</Heading>
               <AddTodoForm onAddTodo={addTodo} />
               {isLoading && <p>Loading...</p>}
               <TodoList

@@ -43,7 +43,7 @@ const TodoList = ({
   return (
     <ul>
       {todoList.map((todoItem) => (
-        <li
+        <div
           key={todoItem.id}
           draggable
           onDragStart={(event) => handleDragStart(event, todoItem.id)}
@@ -55,7 +55,7 @@ const TodoList = ({
             onRemoveTodo={onRemoveTodo}
             onToggleCompletion={onToggleCompletion}
           />
-        </li>
+        </div>
       ))}
     </ul>
   );

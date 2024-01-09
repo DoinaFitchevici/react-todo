@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@200&display=swap");
+body {
+  background-color: beige;
+  font-family: "Inter", sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+input {
+  border-radius: 5px;
+  font: 12px;
+  background-color: lightblue;
+}
+
+button {
+  border-radius: 5px;
+  background-color: lightblue;
+}
+
+@media (max-width: 600px) {
+  body {
+    background-color: bisque;
+  }
+}
