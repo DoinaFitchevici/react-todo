@@ -1,6 +1,6 @@
 import { useState } from "react";
 import InputWithLabel from "./InputWithLabel.js";
-import { ReactComponent as AddButton } from "./icons.svg";
+import { ReactComponent as AddButton, RemoveButton } from "./icons.svg";
 
 const AddTodoForm = ({ onAddTodo }) => {
   const [todoTitle, setTodoTitle] = useState("");

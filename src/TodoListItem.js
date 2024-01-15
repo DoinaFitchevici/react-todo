@@ -1,4 +1,5 @@
 import styles from "./TodoListItem.module.css";
+import { ReactComponent as RemoveButton } from "./deleteicon.svg";
 
 const TodoListItem = ({ todo, onRemoveTodo, onToggleCompletion }) => {
   const { title, id, completed } = todo;
@@ -10,6 +11,7 @@ const TodoListItem = ({ todo, onRemoveTodo, onToggleCompletion }) => {
       }
     >
       <input
+        className={styles.checkbox}
         type="checkbox"
         checked={completed}
         onChange={() => onToggleCompletion(id)}
@@ -18,12 +20,13 @@ const TodoListItem = ({ todo, onRemoveTodo, onToggleCompletion }) => {
       <span>
         &nbsp;
         <button
+          className={styles.button}
           type="button"
           onClick={() => {
             onRemoveTodo(id);
           }}
         >
-          Remove
+          <RemoveButton />
         </button>
       </span>
     </li>

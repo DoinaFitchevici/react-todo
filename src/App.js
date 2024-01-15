@@ -3,6 +3,7 @@ import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled from "styled-components";
+import "./index.css";
 
 const sortByLastModifiedTime =
   "?sort[0][field]=completed&sort[0][direction]=asc&sort[1][field]=lastModifiedTime&sort[1][direction]=asc";
@@ -14,6 +15,7 @@ const Heading = styled.h1`
   margin: 0 auto;
   font-size: 2.2em;
   color: #333300;
+  font-family: "YellowTail", sans-serif;
 `;
 
 const App = () => {
@@ -140,7 +142,7 @@ const App = () => {
         <Route
           path="/"
           element={
-            <>
+            <section>
               <Heading>Todo List</Heading>
               <AddTodoForm onAddTodo={addTodo} />
               {isLoading && <p>Loading...</p>}
@@ -150,7 +152,7 @@ const App = () => {
                 onToggleCompletion={toggleTodoCompletion}
                 onReorderTodo={reorderTodo}
               />
-            </>
+            </section>
           }
         />
         <Route path="/new" element={<h1>New Todo List</h1>} />
