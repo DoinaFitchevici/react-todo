@@ -132,8 +132,17 @@ const App = () => {
         <Route
           path="/"
           element={
-            <>
-              <h1>Todo List</h1>
+            <section>
+              <h1
+                style={{
+                  fontFamily: "'Yellowtail', cursive",
+                  fontWeight: 100,
+                  fontVariant: "small-caps",
+                  textAlign: "center",
+                }}
+              >
+                Todo List
+              </h1>
               <AddTodoForm onAddTodo={addTodo} />
               {isLoading && <p>Loading...</p>}
               <TodoList
@@ -142,7 +151,7 @@ const App = () => {
                 onToggleCompletion={toggleTodoCompletion}
                 onReorderTodo={reorderTodo}
               />
-            </>
+            </section>
           }
         />
         <Route path="/new" element={<h1>New Todo List</h1>} />

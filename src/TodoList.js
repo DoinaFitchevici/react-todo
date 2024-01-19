@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TodoListItem from "./TodoListItem";
+import style from "./AddTodoForm.module.css";
 
 const TodoList = ({
   todoList,
@@ -41,12 +42,19 @@ const TodoList = ({
   };
 
   return (
-    <ul>
+    <ul style={{ listStyle: "none", padding: 0 }}>
       {todoList.map((todoItem) => (
         <li
+          className={`${style.ListItem} ${style.draggableItem}`}
           key={todoItem.id}
           draggable
-          onDragStart={(event) => handleDragStart(event, todoItem.id)}
+          onDragStart={(event) => {
+            handleDragStart(event, todoItem.id);
+            event.currentTarget.classList.add(style.dragging);
+          }}
+          onDragEnd={(event) => {
+            event.currentTarget.classList.remove(style.dragging);
+          }}
           onDragOver={(event) => handleDragOver(event)}
           onDrop={(event) => handleDrop(event, todoItem.id)}
         >
