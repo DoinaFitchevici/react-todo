@@ -135,9 +135,6 @@ const App = () => {
             <section>
               <h1
                 style={{
-                  fontFamily: "'Yellowtail', cursive",
-                  fontWeight: 100,
-                  fontVariant: "small-caps",
                   textAlign: "center",
                 }}
               >
