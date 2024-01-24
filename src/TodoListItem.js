@@ -1,5 +1,6 @@
 import style from "./TodoListItem.module.css";
 import { ReactComponent as RemoveButton } from "./icons/RemoveIcon.svg";
+import { ReactComponent as EditButton } from "./icons/EditIcon.svg";
 import { useState } from "react";
 
 const TodoListItem = ({
@@ -48,14 +49,26 @@ const TodoListItem = ({
       <div className={style.column}>
         &nbsp;
         {edit ? (
-          <button type="button" onClick={handleSaveClick}>
+          <button
+            className={style.button}
+            type="button"
+            onClick={handleSaveClick}
+          >
             Save
           </button>
         ) : (
-          <button type="button" onClick={handleEditClick}>
-            Edit
+          <button
+            className={style.button}
+            type="button"
+            onClick={handleEditClick}
+          >
+            <div className={style.buttonIcon}>
+              <EditButton className={style.EditIcon} />
+            </div>
           </button>
         )}
+      </div>
+      <div className={style.column}>
         <button
           className={style.button}
           type="button"
@@ -64,7 +77,7 @@ const TodoListItem = ({
           }}
         >
           <div className={style.buttonIcon}>
-            <RemoveButton />
+            <RemoveButton className={style.RemoveIcon} />
           </div>
         </button>
       </div>

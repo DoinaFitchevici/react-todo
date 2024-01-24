@@ -55,24 +55,41 @@ div button {
   vertical-align: middle;
 }
 
-.button:hover {
-  background-color: #fa5252;
-}
-
 .button:focus {
   border-color: #6790bb;
   box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
   outline: 0;
 }
 
+.button:hover {
+  background-color: #f7fafa;
+}
+
 .buttonIcon {
-  width: 16px;
-  height: 16px;
-  fill: #4d5353;
   transition: fill 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.EditIcon {
+  width: 18px;
+  height: 18px;
+  fill: #4d5353;
+}
+
+.buttonIcon:hover .EditIcon {
+  fill: #00ccff;
+}
+
+.RemoveIcon {
+  width: 18px;
+  height: 18px;
+  fill: #4d5353;
+}
+
+.buttonIcon:hover .RemoveIcon {
+  fill: #fa5252;
 }
 
 .container {

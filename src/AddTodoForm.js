@@ -32,7 +32,7 @@ const AddTodoForm = ({ onAddTodo }) => {
       </InputWithLabel>
       <button className={style.button} type="submit">
         <div className={style.buttonIcon}>
-          <AddButton />
+          <AddButton className={style.AddIcon} />
         </div>
       </button>
     </form>
