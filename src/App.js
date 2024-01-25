@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { TodoCounterContext } from "./context/TodoCounterContext";
 
 const sortByLastModifiedTime =
   "?sort[0][field]=completed&sort[0][direction]=asc&sort[1][field]=lastModifiedTime&sort[1][direction]=asc";
@@ -11,6 +12,7 @@ const baseUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BA
 const App = () => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { count, setCount } = useContext(TodoCounterContext);
 
   const fetchApi = async ({ method, url, headers, body }) => {
     try {
@@ -56,6 +58,10 @@ const App = () => {
   useEffect(() => {
     getTodos();
   }, []);
+
+  useEffect(() => {
+    setCount(todoList.length);
+  }, [todoList]);
 
   const addTodo = async (newTodo) => {
     try {
@@ -153,13 +159,24 @@ const App = () => {
               </h1>
               <AddTodoForm onAddTodo={addTodo} />
               {isLoading && <p>Loading...</p>}
-              <TodoList
-                todoList={todoList}
-                onRemoveTodo={removeTodo}
-                onToggleCompletion={toggleTodoCompletion}
-                onReorderTodo={reorderTodo}
-                onUpdateNewTitle={updateNewTitle}
-              />
+              <>
+                <span
+                  style={{
+                    fontFamily: "Poppins, sans-serif",
+                    fontWeight: 100,
+                    fontVariant: "small-caps",
+                  }}
+                >
+                  Item Counts: {count}
+                </span>
+                <TodoList
+                  todoList={todoList}
+                  onRemoveTodo={removeTodo}
+                  onToggleCompletion={toggleTodoCompletion}
+                  onReorderTodo={reorderTodo}
+                  onUpdateNewTitle={updateNewTitle}
+                />
+              </>
             </section>
           }
         />
