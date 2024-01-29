@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { TodoCounterContext } from "./context/TodoCounterContext";
 
 const sortByLastModifiedTime =
   "?sort[0][field]=completed&sort[0][direction]=asc&sort[1][field]=lastModifiedTime&sort[1][direction]=asc";
@@ -11,6 +12,7 @@ const baseUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BA
 const App = () => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { count, setCount } = useContext(TodoCounterContext);
 
   const fetchApi = async ({ method, url, headers, body }) => {
     try {
@@ -57,6 +59,10 @@ const App = () => {
     getTodos();
   }, []);
 
+  useEffect(() => {
+    setCount(todoList.length);
+  }, [todoList]);
+
   const addTodo = async (newTodo) => {
     try {
       const url = `${baseUrl}`;
@@ -80,7 +86,9 @@ const App = () => {
         method: "PATCH",
         url,
         headers: { "Content-Type": "application/json" },
-        body: { fields: { completed: newTodo.completed } },
+        body: {
+          fields: { completed: newTodo.completed, title: newTodo.title },
+        },
       });
       await getTodos();
     } catch (error) {
@@ -122,6 +130,15 @@ const App = () => {
     updateTodo(sortedTodoList.find((itemTodo) => itemTodo.id === id));
   };
 
+  const updateNewTitle = (id, newTitle) => {
+    const updatedTodoList = todoList.map((todo) =>
+      todo.id === id ? { ...todo, title: newTitle } : todo
+    );
+
+    setTodoList(updatedTodoList);
+    updateTodo(updatedTodoList.find((itemTodo) => itemTodo.id === id));
+  };
+
   const reorderTodo = (newTodoList) => {
     setTodoList(newTodoList);
   };
@@ -132,17 +149,35 @@ const App = () => {
         <Route
           path="/"
           element={
-            <>
-              <h1>Todo List</h1>
+            <section>
+              <h1
+                style={{
+                  textAlign: "center",
+                }}
+              >
+                Todo List
+              </h1>
               <AddTodoForm onAddTodo={addTodo} />
               {isLoading && <p>Loading...</p>}
-              <TodoList
-                todoList={todoList}
-                onRemoveTodo={removeTodo}
-                onToggleCompletion={toggleTodoCompletion}
-                onReorderTodo={reorderTodo}
-              />
-            </>
+              <>
+                <span
+                  style={{
+                    fontFamily: "Poppins, sans-serif",
+                    fontWeight: 100,
+                    fontVariant: "small-caps",
+                  }}
+                >
+                  Item Counts: {count}
+                </span>
+                <TodoList
+                  todoList={todoList}
+                  onRemoveTodo={removeTodo}
+                  onToggleCompletion={toggleTodoCompletion}
+                  onReorderTodo={reorderTodo}
+                  onUpdateNewTitle={updateNewTitle}
+                />
+              </>
+            </section>
           }
         />
         <Route path="/new" element={<h1>New Todo List</h1>} />

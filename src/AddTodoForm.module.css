@@ -1,0 +1,60 @@
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+input {
+  padding: 0 5px 0 5px;
+  margin: 5px;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  font-size: 13px;
+  line-height: 29px;
+  vertical-align: middle;
+}
+
+.button {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #4d5353;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember", sans-serif;
+  font-size: 13px;
+  line-height: 29px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button:hover {
+  background-color: #f7fafa;
+}
+
+.button:focus {
+  border-color: #6790bb;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  outline: 0;
+}
+
+.buttonIcon {
+  width: 18px;
+  height: 18px;
+  fill: #4d5353;
+  transition: fill 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonIcon:hover .AddIcon {
+  fill: #40c057;
+}

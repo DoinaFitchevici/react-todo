@@ -1,0 +1,117 @@
+.ListItem {
+  color: black;
+  margin: 0.5rem;
+}
+
+div {
+  margin: 5px;
+}
+
+div button {
+  margin-inline: 5px;
+  cursor: pointer;
+}
+
+.completedTodo {
+  color: grey;
+}
+
+.checkbox {
+  width: 1.3em;
+  height: 1.3em;
+  background-color: white;
+  border-radius: 50%;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.draggableItem {
+  cursor: grab;
+}
+
+.dragging {
+  cursor: grabbing;
+}
+
+.button {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #4d5353;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember", sans-serif;
+  font-size: 13px;
+  line-height: 29px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button:focus {
+  border-color: #6790bb;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  outline: 0;
+}
+
+.button:hover {
+  background-color: #f7fafa;
+}
+
+.buttonIcon {
+  transition: fill 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.EditIcon {
+  width: 18px;
+  height: 18px;
+  fill: #4d5353;
+}
+
+.buttonIcon:hover .EditIcon {
+  fill: #00ccff;
+}
+
+.RemoveIcon {
+  width: 18px;
+  height: 18px;
+  fill: #4d5353;
+}
+
+.buttonIcon:hover .RemoveIcon {
+  fill: #fa5252;
+}
+
+.container {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.container .column:first-child,
+.container .column:last-child {
+  flex-grow: 0;
+}
+
+.container .column:nth-child(2) {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}

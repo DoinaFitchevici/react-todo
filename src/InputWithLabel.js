@@ -8,7 +8,16 @@ const InputWithLabel = ({ id, children, name, type, value, onChange }) => {
 
   return (
     <>
-      <label htmlFor={id}>{children}</label>
+      <label
+        style={{
+          fontFamily: "Poppins, sans-serif",
+          fontWeight: 100,
+          fontVariant: "small-caps",
+        }}
+        htmlFor={id}
+      >
+        {children}
+      </label>
       <input
         name={name}
         type={type}

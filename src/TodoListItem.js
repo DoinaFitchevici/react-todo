@@ -1,26 +1,87 @@
-const TodoListItem = ({ todo, onRemoveTodo, onToggleCompletion }) => {
+import style from "./TodoListItem.module.css";
+import { ReactComponent as RemoveButton } from "./icons/RemoveIcon.svg";
+import { ReactComponent as EditButton } from "./icons/EditIcon.svg";
+import { useState } from "react";
+
+const TodoListItem = ({
+  todo,
+  onRemoveTodo,
+  onToggleCompletion,
+  onUpdateNewTitle,
+}) => {
   const { title, id, completed } = todo;
 
+  const [edit, setEdit] = useState(false);
+  const [newTitle, setNewTitle] = useState(title);
+
+  const handleEditClick = () => {
+    setEdit(true);
+  };
+
+  const handleTitleChange = (event) => {
+    setNewTitle(event.target.value);
+  };
+
+  const handleSaveClick = (event) => {
+    onUpdateNewTitle(id, newTitle);
+    setEdit(false);
+  };
+
   return (
-    <li style={{ textDecoration: completed ? "line-through" : "none" }}>
-      <input
-        type="checkbox"
-        checked={completed}
-        onChange={() => onToggleCompletion(id)}
-      />
-      {title}
-      <span>
+    <div className={style.container}>
+      <div className={style.column}>
+        <input
+          className={style.checkbox}
+          type="checkbox"
+          checked={completed}
+          onChange={() => onToggleCompletion(id)}
+        />
+      </div>
+      <div className={style.column}>
+        {edit ? (
+          <input value={newTitle} onChange={handleTitleChange} />
+        ) : (
+          <span className={completed ? style.completedTodo : style.ListItem}>
+            {title}
+          </span>
+        )}
+      </div>
+      <div className={style.column}>
         &nbsp;
+        {edit ? (
+          <button
+            className={style.button}
+            type="button"
+            onClick={handleSaveClick}
+          >
+            Save
+          </button>
+        ) : (
+          <button
+            className={style.button}
+            type="button"
+            onClick={handleEditClick}
+          >
+            <div className={style.buttonIcon}>
+              <EditButton className={style.EditIcon} />
+            </div>
+          </button>
+        )}
+      </div>
+      <div className={style.column}>
         <button
+          className={style.button}
           type="button"
           onClick={() => {
             onRemoveTodo(id);
           }}
         >
-          Remove
+          <div className={style.buttonIcon}>
+            <RemoveButton className={style.RemoveIcon} />
+          </div>
         </button>
-      </span>
-    </li>
+      </div>
+    </div>
   );
 };
 
