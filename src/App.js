@@ -4,6 +4,8 @@ import AddTodoForm from "./components/AddTodoForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TodoCounterContext } from "./context/TodoCounterContext";
 import PropTypes from "prop-types";
+import LandingPage from "./LandingPage";
+import { Link } from "react-router-dom";
 
 const sortByLastModifiedTime =
   "?sort[0][field]=completed&sort[0][direction]=asc&sort[1][field]=lastModifiedTime&sort[1][direction]=asc";
@@ -147,10 +149,16 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<LandingPage />} />
         <Route
-          path="/"
+          path="/TodoList"
           element={
-            <section>
+            <section style={{ position: "relative" }}>
+              <button>
+                <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+                  Back
+                </Link>
+              </button>
               <h1
                 style={{
                   textAlign: "center",
@@ -181,7 +189,19 @@ const App = () => {
             </section>
           }
         />
-        <Route path="/new" element={<h1>New Todo List</h1>} />
+        <Route
+          path="/NewTodoList"
+          element={
+            <>
+              <button>
+                <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+                  Back
+                </Link>
+              </button>
+              <h1>New Todo List</h1>
+            </>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

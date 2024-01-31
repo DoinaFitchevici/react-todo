@@ -77,7 +77,7 @@ TodoList.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      completed: PropTypes.bool.isRequired,
+      completed: PropTypes.bool,
     })
   ).isRequired,
   onRemoveTodo: PropTypes.func.isRequired,
