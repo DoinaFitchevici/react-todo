@@ -24,6 +24,7 @@ const AddTodoForm = ({ onAddTodo }) => {
       <InputWithLabel
         name="title"
         type="text"
+        placeholder="Type todo"
         id="todoTitle"
         value={todoTitle}
         onChange={handleTitleChange}
