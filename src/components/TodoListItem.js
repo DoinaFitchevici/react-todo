@@ -2,6 +2,7 @@ import style from "./TodoListItem.module.css";
 import { ReactComponent as RemoveButton } from "./icons/RemoveIcon.svg";
 import { ReactComponent as EditButton } from "./icons/EditIcon.svg";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const TodoListItem = ({
   todo,
@@ -83,6 +84,19 @@ const TodoListItem = ({
       </div>
     </div>
   );
+};
+
+TodoListItem.propTypes = {
+  todo: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      completed: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
+  onRemoveTodo: PropTypes.func.isRequired,
+  onToggleCompletion: PropTypes.func.isRequired,
+  onUpdateNewTitle: PropTypes.func.isRequired,
 };
 
 export default TodoListItem;

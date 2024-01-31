@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TodoListItem from "./TodoListItem";
 import style from "./AddTodoForm.module.css";
+import PropTypes from "prop-types";
 
 const TodoList = ({
   todoList,
@@ -69,6 +70,20 @@ const TodoList = ({
       ))}
     </ul>
   );
+};
+
+TodoList.propTypes = {
+  todoList: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      completed: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
+  onRemoveTodo: PropTypes.func.isRequired,
+  onToggleCompletion: PropTypes.func.isRequired,
+  onReorderTodo: PropTypes.func.isRequired,
+  onUpdateNewTitle: PropTypes.func.isRequired,
 };
 
 export default TodoList;
