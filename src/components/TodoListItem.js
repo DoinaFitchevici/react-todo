@@ -87,13 +87,11 @@ const TodoListItem = ({
 };
 
 TodoListItem.propTypes = {
-  todo: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      completed: PropTypes.bool.isRequired,
-    })
-  ).isRequired,
+  todo: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    completed: PropTypes.bool.isRequired,
+  }).isRequired,
   onRemoveTodo: PropTypes.func.isRequired,
   onToggleCompletion: PropTypes.func.isRequired,
   onUpdateNewTitle: PropTypes.func.isRequired,
