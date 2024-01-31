@@ -1,6 +1,14 @@
 import { useRef, useEffect } from "react";
 
-const InputWithLabel = ({ id, children, name, type, value, onChange }) => {
+const InputWithLabel = ({
+  id,
+  children,
+  name,
+  type,
+  placeholder,
+  value,
+  onChange,
+}) => {
   const inputRef = useRef();
   useEffect(() => {
     inputRef.current.focus();
@@ -21,6 +29,7 @@ const InputWithLabel = ({ id, children, name, type, value, onChange }) => {
       <input
         name={name}
         type={type}
+        placeholder={placeholder}
         id={id}
         value={value}
         onChange={onChange}
