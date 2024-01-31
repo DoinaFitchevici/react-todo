@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import TodoList from "./TodoList";
-import AddTodoForm from "./AddTodoForm";
+import TodoList from "./components/TodoList";
+import AddTodoForm from "./components/AddTodoForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TodoCounterContext } from "./context/TodoCounterContext";
 
