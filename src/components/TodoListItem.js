@@ -1,7 +1,7 @@
 import style from "./TodoListItem.module.css";
 import { ReactComponent as RemoveButton } from "./icons/RemoveIcon.svg";
 import { ReactComponent as EditButton } from "./icons/EditIcon.svg";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 const TodoListItem = ({
@@ -28,6 +28,13 @@ const TodoListItem = ({
     setEdit(false);
   };
 
+  const inputRef = useRef();
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  });
+
   return (
     <div className={style.container}>
       <div className={style.column}>
@@ -40,7 +47,7 @@ const TodoListItem = ({
       </div>
       <div className={style.column}>
         {edit ? (
-          <input value={newTitle} onChange={handleTitleChange} />
+          <input ref={inputRef} value={newTitle} onChange={handleTitleChange} />
         ) : (
           <span className={completed ? style.completedTodo : style.ListItem}>
             {title}
