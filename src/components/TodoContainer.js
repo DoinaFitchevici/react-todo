@@ -43,7 +43,7 @@ const TodoContainer = ({ tableName }) => {
 
   const getTodos = async () => {
     try {
-      const url = `${baseUrl}${tableName}${sortByLastModifiedTime}`;
+      const url = `${baseUrl}${tableName}${sortByLastModifiedTime}&view=Grid%20view`;
       const data = await fetchApi({ method: "GET", url });
       const todos = data.records.map((todo) => ({
         title: todo.fields.title,
