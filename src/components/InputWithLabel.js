@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import PropTypes from "prop-types";
 
 const InputWithLabel = ({
   id,
@@ -11,8 +12,10 @@ const InputWithLabel = ({
 }) => {
   const inputRef = useRef();
   useEffect(() => {
-    inputRef.current.focus();
-  });
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   return (
     <>
@@ -39,4 +42,13 @@ const InputWithLabel = ({
   );
 };
 
+InputWithLabel.propTypes = {
+  id: PropTypes.string.isRequired,
+  children: PropTypes.node,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 export default InputWithLabel;
