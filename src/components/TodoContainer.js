@@ -15,6 +15,7 @@ const TodoContainer = ({ tableName }) => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { count, setCount } = useContext(TodoCounterContext);
+  const [currentSortField, setCurrentSortField] = useState("title");
 
   const fetchApi = async ({ method, url, headers, body }) => {
     try {
@@ -43,9 +44,10 @@ const TodoContainer = ({ tableName }) => {
 
   const getTodos = async () => {
     try {
+      debugger;
       const url = `${baseUrl}${tableName}?view=Grid%20view`;
       const data = await fetchApi({ method: "GET", url });
-
+      debugger;
       const todos = data.records.map((todo) => ({
         title: todo.fields.title,
         id: todo.id,
@@ -53,14 +55,7 @@ const TodoContainer = ({ tableName }) => {
         createDateTime: todo.fields.createDateTime,
       }));
 
-      const sortedTodos = todos.sort((objectA, objectB) => {
-        const titleA = objectA.title.toUpperCase();
-        const titleB = objectB.title.toUpperCase();
-
-        return titleA < titleB ? -1 : titleA === titleB ? 0 : 1;
-      });
-      console.log(sortedTodos);
-      setTodoList(sortedTodos);
+      updateSorts(todos, currentSortField);
     } catch (error) {
       console.log(error);
     }
@@ -132,65 +127,45 @@ const TodoContainer = ({ tableName }) => {
   };
 
   const toggleTodoCompletion = (id) => {
-    const todo = todoList.find((itemTodo) => itemTodo.id === id);
-    const updatedTodo = {
-      ...todo,
-      completeDateTime: todo.completeDateTime ? null : new Date().toISOString(),
-    };
-    debugger;
+    let todo = todoList.find((itemTodo) => itemTodo.id === id);
+    todo.completeDateTime = todo.completeDateTime
+      ? null
+      : new Date().toISOString();
 
-    const updatedTodoList = todoList.map((todo) =>
-      todo.id === id
-        ? {
-            ...todo,
-            completeDateTime: todo.completeDateTime
-              ? null
-              : new Date().toISOString(),
-          }
-        : todo
-    );
-
-    // const sortedTodoList = updatedTodoList.sort((a, b) =>
-    //   a.completed === b.completed ? 0 : a.completed ? 1 : -1
-    // );
-
-    setTodoList(updatedTodoList);
-    updateTodo(updatedTodoList.find((itemTodo) => itemTodo.id === id));
+    updateTodo(todo);
   };
 
   const updateNewTitle = (id, newTitle) => {
-    const updatedTodoList = todoList.map((todo) =>
-      todo.id === id ? { ...todo, title: newTitle } : todo
-    );
-
-    setTodoList(updatedTodoList);
-    updateTodo(updatedTodoList.find((itemTodo) => itemTodo.id === id));
+    let todo = todoList.find((itemTodo) => itemTodo.id === id);
+    todo.title = newTitle;
+    updateTodo(todo);
   };
 
   const reorderTodo = (newTodoList) => {
     setTodoList(newTodoList);
   };
 
-  const updateSorts = (e) => {
-    debugger;
-    const sortedTodos = todoList.sort((objectA, objectB) => {
-      if (e.target.value === "title") {
-        const titleA = objectA.title;
-        const titleB = objectB.title;
+  const updateSorts = (todos, sortBy) => {
+    let sortedTodos = [];
+    if (sortBy === "title") {
+      sortedTodos = [...todos].sort((objectA, objectB) => {
+        const titleA = objectA.title.toUpperCase();
+        const titleB = objectB.title.toUpperCase();
 
         return titleA < titleB ? -1 : titleA === titleB ? 0 : 1;
-      } else if (e.target.value === "completeDateTime") {
-        const dateA = objectA.completeDateTime;
-        const dateB = objectB.completeDateTime;
+      });
+    } else if (sortBy === "completeDateTime") {
+      sortedTodos = [...todoList].sort((objectA, objectB) => {
+        const dateA = new Date(objectA.completeDateTime);
+        const dateB = new Date(objectB.completeDateTime);
 
-        if (dateA === undefined) return -1;
-        if (dateB === undefined) return 1;
+        if (isNaN(dateA)) return -1;
+        if (isNaN(dateB)) return 1;
 
-        return Date(dateA) - Date(dateB);
-      }
-    });
-
-    console.log("sortedTodos", sortedTodos);
+        return dateA - dateB;
+      });
+    }
+    console.log(sortedTodos);
     setTodoList(sortedTodos);
   };
   return (
@@ -200,7 +175,13 @@ const TodoContainer = ({ tableName }) => {
           Back
         </Link>
       </button>
-      <select onChange={updateSorts}>
+      &nbsp;
+      <select
+        onChange={(e) => {
+          setCurrentSortField(e.target.value);
+          updateSorts(todoList, e.target.value);
+        }}
+      >
         <option value="title">title</option>
         <option value="completeDateTime">completeDateTime</option>
       </select>
