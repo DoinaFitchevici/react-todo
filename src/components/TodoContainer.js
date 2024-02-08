@@ -43,15 +43,8 @@ const TodoContainer = ({ tableName }) => {
 
   const getTodos = async () => {
     try {
-      const url = `${baseUrl}${tableName}?view=Grid%20view&sort[0][field]=completeDateTime&sort[0][direction]=asc&sort[1][field]=createDateTime&sort[1][direction]=desc`;
+      const url = `${baseUrl}${tableName}?view=Grid%20view`;
       const data = await fetchApi({ method: "GET", url });
-
-      // const sortedTodos = data.records.sort((objectA, objectB) => {
-      //   const titleA = objectA.fields.title;
-      //   const titleB = objectB.fields.title;
-
-      //   return titleA < titleB ? -1 : titleA === titleB ? 0 : 1;
-      // });
 
       const todos = data.records.map((todo) => ({
         title: todo.fields.title,
@@ -60,7 +53,14 @@ const TodoContainer = ({ tableName }) => {
         createDateTime: todo.fields.createDateTime,
       }));
 
-      setTodoList(todos);
+      const sortedTodos = todos.sort((objectA, objectB) => {
+        const titleA = objectA.title.toUpperCase();
+        const titleB = objectB.title.toUpperCase();
+
+        return titleA < titleB ? -1 : titleA === titleB ? 0 : 1;
+      });
+      console.log(sortedTodos);
+      setTodoList(sortedTodos);
     } catch (error) {
       console.log(error);
     }
@@ -171,6 +171,28 @@ const TodoContainer = ({ tableName }) => {
     setTodoList(newTodoList);
   };
 
+  const updateSorts = (e) => {
+    debugger;
+    const sortedTodos = todoList.sort((objectA, objectB) => {
+      if (e.target.value === "title") {
+        const titleA = objectA.title;
+        const titleB = objectB.title;
+
+        return titleA < titleB ? -1 : titleA === titleB ? 0 : 1;
+      } else if (e.target.value === "completeDateTime") {
+        const dateA = objectA.completeDateTime;
+        const dateB = objectB.completeDateTime;
+
+        if (dateA === undefined) return -1;
+        if (dateB === undefined) return 1;
+
+        return Date(dateA) - Date(dateB);
+      }
+    });
+
+    console.log("sortedTodos", sortedTodos);
+    setTodoList(sortedTodos);
+  };
   return (
     <section style={{ position: "relative" }}>
       <button>
@@ -178,6 +200,10 @@ const TodoContainer = ({ tableName }) => {
           Back
         </Link>
       </button>
+      <select onChange={updateSorts}>
+        <option value="title">title</option>
+        <option value="completeDateTime">completeDateTime</option>
+      </select>
       <h1
         style={{
           textAlign: "center",
