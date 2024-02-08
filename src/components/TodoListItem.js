@@ -10,7 +10,7 @@ const TodoListItem = ({
   onToggleCompletion,
   onUpdateNewTitle,
 }) => {
-  const { title, id, completed } = todo;
+  const { title, id, completeDateTime } = todo;
 
   const [edit, setEdit] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
@@ -41,7 +41,7 @@ const TodoListItem = ({
         <input
           className={style.checkbox}
           type="checkbox"
-          checked={completed}
+          checked={!!completeDateTime}
           onChange={() => onToggleCompletion(id)}
         />
       </div>
@@ -49,7 +49,11 @@ const TodoListItem = ({
         {edit ? (
           <input ref={inputRef} value={newTitle} onChange={handleTitleChange} />
         ) : (
-          <span className={completed ? style.completedTodo : style.ListItem}>
+          <span
+            className={
+              !!completeDateTime ? style.completedTodo : style.ListItem
+            }
+          >
             {title}
           </span>
         )}

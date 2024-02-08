@@ -43,12 +43,21 @@ const TodoContainer = ({ tableName }) => {
 
   const getTodos = async () => {
     try {
-      const url = `${baseUrl}${tableName}${sortByLastModifiedTime}&view=Grid%20view`;
+      const url = `${baseUrl}${tableName}?view=Grid%20view&sort[0][field]=completeDateTime&sort[0][direction]=asc&sort[1][field]=createDateTime&sort[1][direction]=desc`;
       const data = await fetchApi({ method: "GET", url });
+
+      // const sortedTodos = data.records.sort((objectA, objectB) => {
+      //   const titleA = objectA.fields.title;
+      //   const titleB = objectB.fields.title;
+
+      //   return titleA < titleB ? -1 : titleA === titleB ? 0 : 1;
+      // });
+
       const todos = data.records.map((todo) => ({
         title: todo.fields.title,
         id: todo.id,
-        completed: todo.fields.completed || false,
+        completeDateTime: todo.fields.completeDateTime,
+        createDateTime: todo.fields.createDateTime,
       }));
 
       setTodoList(todos);
@@ -89,7 +98,10 @@ const TodoContainer = ({ tableName }) => {
         url,
         headers: { "Content-Type": "application/json" },
         body: {
-          fields: { completed: newTodo.completed, title: newTodo.title },
+          fields: {
+            completeDateTime: newTodo.completeDateTime,
+            title: newTodo.title,
+          },
         },
       });
       await getTodos();
@@ -120,16 +132,30 @@ const TodoContainer = ({ tableName }) => {
   };
 
   const toggleTodoCompletion = (id) => {
+    const todo = todoList.find((itemTodo) => itemTodo.id === id);
+    const updatedTodo = {
+      ...todo,
+      completeDateTime: todo.completeDateTime ? null : new Date().toISOString(),
+    };
+    debugger;
+
     const updatedTodoList = todoList.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      todo.id === id
+        ? {
+            ...todo,
+            completeDateTime: todo.completeDateTime
+              ? null
+              : new Date().toISOString(),
+          }
+        : todo
     );
 
-    const sortedTodoList = updatedTodoList.sort((a, b) =>
-      a.completed === b.completed ? 0 : a.completed ? 1 : -1
-    );
+    // const sortedTodoList = updatedTodoList.sort((a, b) =>
+    //   a.completed === b.completed ? 0 : a.completed ? 1 : -1
+    // );
 
-    setTodoList(sortedTodoList);
-    updateTodo(sortedTodoList.find((itemTodo) => itemTodo.id === id));
+    setTodoList(updatedTodoList);
+    updateTodo(updatedTodoList.find((itemTodo) => itemTodo.id === id));
   };
 
   const updateNewTitle = (id, newTitle) => {
