@@ -28,6 +28,12 @@ const TodoListItem = ({
     setEdit(false);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSaveClick();
+    }
+  };
+
   const inputRef = useRef();
   useEffect(() => {
     if (inputRef.current) {
@@ -47,7 +53,12 @@ const TodoListItem = ({
       </div>
       <div className={style.column}>
         {edit ? (
-          <input ref={inputRef} value={newTitle} onChange={handleTitleChange} />
+          <input
+            ref={inputRef}
+            value={newTitle}
+            onChange={handleTitleChange}
+            onKeyDown={handleKeyDown}
+          />
         ) : (
           <span
             className={
