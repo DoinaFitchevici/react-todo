@@ -170,21 +170,24 @@ const TodoContainer = ({ tableName }) => {
   };
   return (
     <section style={{ position: "relative" }}>
-      <button>
-        <Link to="/" style={{ color: "black", textDecoration: "none" }}>
-          Back
-        </Link>
-      </button>
-      &nbsp;
-      <select
-        onChange={(e) => {
-          setCurrentSortField(e.target.value);
-          updateSorts(todoList, e.target.value);
-        }}
-      >
-        <option value="title">title</option>
-        <option value="completeDateTime">completeDateTime</option>
-      </select>
+      <span className="containerTop">
+        <button>
+          <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+            Back
+          </Link>
+        </button>
+        &nbsp;
+        <select
+          className="right-select"
+          onChange={(e) => {
+            setCurrentSortField(e.target.value);
+            updateSorts(todoList, e.target.value);
+          }}
+        >
+          <option value="title">title</option>
+          <option value="completeDateTime">completeDateTime</option>
+        </select>
+      </span>
       <h1
         style={{
           textAlign: "center",
