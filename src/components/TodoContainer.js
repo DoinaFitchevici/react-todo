@@ -55,6 +55,7 @@ const TodoContainer = ({ tableName }) => {
         createDateTime: todo.fields.createDateTime,
       }));
 
+      setTodoList(todos);
       updateSorts(todos, currentSortField);
     } catch (error) {
       console.log(error);
