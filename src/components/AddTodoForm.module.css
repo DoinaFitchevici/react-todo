@@ -17,6 +17,7 @@ input {
 }
 
 .button {
+  margin-bottom: 18px;
   background-color: #fff;
   border: 1px solid #d5d9d9;
   border-radius: 8px;
