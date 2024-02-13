@@ -1,20 +1,20 @@
 <p align="center">
-  <a href="https://react-todo-amiro.vercel.app/">
-    <img alt="Todo List" src="./public/todo.png" />
+  <a href="https://react-todo-wine-one.vercel.app">
+    <img alt="Todo List" src="./public/pink.svg" />
   </a>
 </p>
 <h1 align="center" style="color: #b48ead;">
   React App: Todo List™
 </h1>
 
-[![Follow @AmirhosseinOlyaei](https://img.shields.io/github/followers/AmirhosseinOlyaei?label=Follow%20@AmirhosseinOlyaei&style=social)](https://github.com/AmirhosseinOlyaei?screen_name=AmirhosseinOlyaei)
+[![Follow @DoinaFitchevici](https://img.shields.io/github/followers/DoinaFitchevici?label=Follow%20@DoinaFitchevici&style=social)](https://github.com/DoinaFitchevici?screen_name=DoinaFitchevici)
 [![Website](https://img.shields.io/badge/-website-CDA4DE)](https://react-todo-amiro.vercel.app/)
-[![contributors-shield](https://img.shields.io/github/contributors/AmirhosseinOlyaei/react-todo.svg)](https://github.com/AmirhosseinOlyaei/react-todo/graphs/contributors)
-[![forks-shield](https://img.shields.io/github/forks/AmirhosseinOlyaei/react-todo.svg)](https://github.com/AmirhosseinOlyaei/react-todo/network/members)
-[![stars-shield](https://img.shields.io/github/stars/AmirhosseinOlyaei/react-todo.svg?color=lightblue)](https://github.com/AmirhosseinOlyaei/react-todo/stargazers)
-[![issues-shield](https://img.shields.io/github/issues/AmirhosseinOlyaei/react-todo.svg?color=pink)](https://github.com/AmirhosseinOlyaei/react-todo/issues)
+[![contributors-shield](https://img.shields.io/github/contributors/DoinaFitchevici/react-todo.svg)](https://github.com/DoinaFitchevici/react-todo/graphs/contributors)
+[![forks-shield](https://img.shields.io/github/forks/DoinaFitchevici/react-todo.svg)](https://github.com/DoinaFitchevici/react-todo/network/members)
+[![stars-shield](https://img.shields.io/github/stars/DoinaFitchevici/react-todo.svg?color=lightblue)](https://github.com/DoinaFitchevici/react-todo/stargazers)
+[![issues-shield](https://img.shields.io/github/issues/DoinaFitchevici/react-todo.svg?color=pink)](https://github.com/DoinaFitchevici/react-todo/issues)
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](./LICENSE)
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/AmirhosseinOlyaei?color=darkgreen)](https://github.com/sponsors/AmirhosseinOlyaei)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/DoinaFitchevici?color=darkgreen)](https://github.com/sponsors/DoinaFitchevici)
 
 ![Todo list snapshot](./public/Todo-Screenshot.png)
 
@@ -63,10 +63,10 @@ npm install npm@latest -g
 
 ```sh
 SSH:
-git clone git@github.com:AmirhosseinOlyaei/react-todo.git
+git clone git@github.com:DoinaFitchevici/react-todo.git
 
 HTTPS:
-git clone https://github.com/AmirhosseinOlyaei/react-todo.git
+git clone https://github.com/DoinaFitchevici/react-todo.git
 ```
 
 - Install NPM packages
@@ -151,7 +151,7 @@ If you have any questions or feedback, feel free to reach out to [DevArts](https
 
 ## 👨‍💻 Author
 
-- [Amir Olyaei](https://github.com/AmirhosseinOlyaei)
+- [Amir Olyaei](https://github.com/DoinaFitchevici)
 
 <a id="license"></a>
 
