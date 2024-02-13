@@ -8,15 +8,14 @@
 </h1>
 
 [![Follow @DoinaFitchevici](https://img.shields.io/github/followers/DoinaFitchevici?label=Follow%20@DoinaFitchevici&style=social)](https://github.com/DoinaFitchevici?screen_name=DoinaFitchevici)
-[![Website](https://img.shields.io/badge/-website-CDA4DE)](https://react-todo-amiro.vercel.app/)
+[![Website](https://img.shields.io/badge/-website-CDA4DE)](https://react-todo-wine-one.vercel.app)
 [![contributors-shield](https://img.shields.io/github/contributors/DoinaFitchevici/react-todo.svg)](https://github.com/DoinaFitchevici/react-todo/graphs/contributors)
 [![forks-shield](https://img.shields.io/github/forks/DoinaFitchevici/react-todo.svg)](https://github.com/DoinaFitchevici/react-todo/network/members)
 [![stars-shield](https://img.shields.io/github/stars/DoinaFitchevici/react-todo.svg?color=lightblue)](https://github.com/DoinaFitchevici/react-todo/stargazers)
-[![issues-shield](https://img.shields.io/github/issues/DoinaFitchevici/react-todo.svg?color=pink)](https://github.com/DoinaFitchevici/react-todo/issues)
+[![issues-shield](https://img.shields.io/github/issues/DoinaFitchevici/react-todo.svg?color=orange)](https://github.com/DoinaFitchevici/react-todo/issues)
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](./LICENSE)
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/DoinaFitchevici?color=darkgreen)](https://github.com/sponsors/DoinaFitchevici)
 
-![Todo list snapshot](./public/Todo-Screenshot.png)
+![Todo list snapshot](./public/screenshot.png)
 
 This is a Todo List application built using React.js.
 
@@ -24,7 +23,7 @@ This is a Todo List application built using React.js.
   and delete them from the list.
 - The app also includes functionalities like filtering tasks by status (completed or not) and sorting them in ascending or descending.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Getting Started](#getting-started)
 - [Prerequisites](#prerequisites)
@@ -37,15 +36,11 @@ This is a Todo List application built using React.js.
 - [Author](#author)
 - [License](#license)
 
-<a id="getting-started"></a>
-
-## 🚀 Getting Started
+## Getting Started
 
 To get a local copy up and running follow these steps.
 
-<a id="prerequisites"></a>
-
-### 📦 Prerequisites
+### Prerequisites
 
 - npm
 
@@ -55,9 +50,7 @@ npm install npm@latest -g
 
 > It updates npm to the latest version.
 
-<a id="installation"></a>
-
-### 📥 Installation
+### Installation
 
 - Clone the repo
 
@@ -75,9 +68,7 @@ git clone https://github.com/DoinaFitchevici/react-todo.git
 npm install
 ```
 
-<a id="usage"></a>
-
-### 💡 Usage
+### Usage
 
 To run the application, execute the following command:
 
@@ -87,11 +78,9 @@ npm start
 
 The application will open in your default web browser at http://localhost:3000. You can add new todo items, mark them as complete, and delete them.
 
-<a id="user-manual"></a>
+## User Manual
 
-## 📚 User Manual
-
-### ➕ How to add a new todo item?
+### How to add a new todo item?
 
 1. First, click on the "Add Todo" button at the bottom right corner of the app.
 
@@ -103,7 +92,7 @@ The application will open in your default web browser at http://localhost:3000. 
 
 > Remember, if you don't complete a todo item within a certain time, it will automatically be moved to the "Overdue" category. You can reassign a todo item to any other category by clicking on the "Reassign" button.
 
-### ✅ How to mark a todo item as completed?
+### How to mark a todo item as completed?
 
 1. Click on the todo item that you want to mark as completed.
 
@@ -111,7 +100,7 @@ The application will open in your default web browser at http://localhost:3000. 
 
 > Please note that you cannot manually remove a todo item from the completed list. This list automatically updates to reflect your progress.
 
-### 🗑️ How to delete a todo item?
+### How to delete a todo item?
 
 1. Find the todo item that you want to delete in the list of todos.
 
@@ -121,9 +110,7 @@ The application will open in your default web browser at http://localhost:3000. 
 
 > Please note that this is a basic example of a todo list app. In a real-world scenario, the process of deleting a todo item may involve additional steps, such as confirming the action or handling potential errors. Additionally, this operation might require a different approach if the todo list is being fetched from an API, as it may require making a DELETE request to the API.
 
-<a id="additional-resources"></a>
-
-## 🎓 Additional Resources
+## Additional Resources
 
 - [React](https://react.dev/)
 - [Chakra UI](https://chakra-ui.com/)
@@ -140,21 +127,17 @@ The application will open in your default web browser at http://localhost:3000. 
 Special thanks and a shout out to the following individuals and organizations:
 
 - [Code the Dream](https://www.codethedream.org/) for their exceptional coding school, providing valuable learning resources and support.
-- [FontAwesome](https://fontawesome.com/) for the icons used in this project.
+- [SVGREPO](https://www.svgrepo.com) for the icons used in this project.
 - Hat tip to anyone whose code was used.
 
 ## Contact
 
-If you have any questions or feedback, feel free to reach out to [DevArts](https://devarts.notion.site/devarts/61c6b79808ce476290c753165851b070?v=9d442848a814451fba7a2e1b99bebb9b).
+If you have any questions or feedback, feel free to reach out to my [LinkedIn](https://www.linkedin.com/in/doina-fitchevici/).
 
-<a id="author"></a>
+## Author
 
-## 👨‍💻 Author
+- [Doina Fitchevici](https://github.com/DoinaFitchevici)
 
-- [Amir Olyaei](https://github.com/DoinaFitchevici)
-
-<a id="license"></a>
-
-## 📜 License
+## License
 
 Distributed under the MIT License. See [`LICENSE`](./LICENSE) for more information.
