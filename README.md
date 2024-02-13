@@ -4,24 +4,24 @@
   </a>
 </p>
 <h1 align="center" style="color: #fa9291;">
-  React App: Your Busy Bee List™
+  React App: Your Task Tracker™
 </h1>
 
 [![Follow @DoinaFitchevici](https://img.shields.io/github/followers/DoinaFitchevici?label=Follow%20@DoinaFitchevici&style=social)](https://github.com/DoinaFitchevici?screen_name=DoinaFitchevici)
-[![Website](https://img.shields.io/badge/-website-CDA4DE)](https://react-todo-wine-one.vercel.app)
+[![Website](https://img.shields.io/badge/-website-F2DEDF)](https://react-todo-wine-one.vercel.app)
 [![contributors-shield](https://img.shields.io/github/contributors/DoinaFitchevici/react-todo.svg)](https://github.com/DoinaFitchevici/react-todo/graphs/contributors)
 [![forks-shield](https://img.shields.io/github/forks/DoinaFitchevici/react-todo.svg)](https://github.com/DoinaFitchevici/react-todo/network/members)
-[![stars-shield](https://img.shields.io/github/stars/DoinaFitchevici/react-todo.svg?color=lightblue)](https://github.com/DoinaFitchevici/react-todo/stargazers)
+[![stars-shield](https://img.shields.io/github/stars/DoinaFitchevici/react-todo.svg?color=yellow)](https://github.com/DoinaFitchevici/react-todo/stargazers)
 [![issues-shield](https://img.shields.io/github/issues/DoinaFitchevici/react-todo.svg?color=orange)](https://github.com/DoinaFitchevici/react-todo/issues)
-[![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](./LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 ![Todo list snapshot](./public/screenshot.png)
 
 This is a Todo List application built using React.js.
 
-- It allows you to add tasks, mark them as completed
-  and delete them from the list.
-- The app also includes functionalities like filtering tasks by status (completed or not) and sorting them in ascending or descending.
+- Creates, edits, marks as complete, and deletes tasks effortlessly.
+- Filters tasks by status (completed or not) and sorts in ascending order.
+- Easily tracks item count and switches between lists.
 
 ## Table of Contents
 
@@ -76,49 +76,50 @@ To run the application, execute the following command:
 npm start
 ```
 
-The application will open in your default web browser at http://localhost:3000. You can add new todo items, mark them as complete, and delete them.
+The application will open in your default web browser at http://localhost:3000. You can add new todo items, edit, mark as complete, and delete them.
 
 ## User Manual
 
 ### How to add a new todo item?
 
-1. First, click on the "Add Todo" button at the bottom right corner of the app.
+1. Enter the title of your new todo item in the input box labeled "Title".
 
-- This will open a form where you can add the title of your new todo item.
-
-2. Next, click on the "Choose a Category" dropdown menu to select a category for your todo item. This will help you organize your todos by different categories.
-
-3. Finally, click on the "Add" button to add your new todo item to the list.
-
-> Remember, if you don't complete a todo item within a certain time, it will automatically be moved to the "Overdue" category. You can reassign a todo item to any other category by clicking on the "Reassign" button.
+2. Next, click on the "Add" icon/button next to the input box to add a new todo item to the list.
 
 ### How to mark a todo item as completed?
 
-1. Click on the todo item that you want to mark as completed.
+1. Find the todo item that you want to mark completed in the list of todos.
 
-- The todo item will now appear as crossed out, indicating that it is complete.
+2. Select the circle on the left of the todo item to mark it as complete.
 
-> Please note that you cannot manually remove a todo item from the completed list. This list automatically updates to reflect your progress.
+### How to edit a todo item?
+
+1. Find the todo item that you want to edit in the list of todos.
+
+2. Click on the "Edit" icon/button that is located on the right side of the todo item.
+
+> Note that the item will have the focus on.
+
+3. Edit the item.
+
+4. Click on the "Save" button/press ENTER to save the edited item.
 
 ### How to delete a todo item?
 
 1. Find the todo item that you want to delete in the list of todos.
 
-2. Click on the "Delete" button that is located on the right side of the todo item.
+2. Click on the "Delete" icon/button that is located on the right side of the todo item.
 
 3. The todo item will now be removed from the list.
 
-> Please note that this is a basic example of a todo list app. In a real-world scenario, the process of deleting a todo item may involve additional steps, such as confirming the action or handling potential errors. Additionally, this operation might require a different approach if the todo list is being fetched from an API, as it may require making a DELETE request to the API.
+> Please note that if the todo list is sourced from an API, consider incorporating a DELETE request to the API to remove the corresponding item.
 
 ## Additional Resources
 
 - [React](https://react.dev/)
-- [Chakra UI](https://chakra-ui.com/)
-- [DaisyUI](https://daisyui.com/)
 - [Learn React](https://scrimba.com/learn/learnreact)
-- [Code with Mosh](https://codewithmosh.com/)
-- [Epic React](https://epicreact.dev/modules/react-hooks/react-hooks-welcome)
-- [Beautiful DND](https://github.com/atlassian/react-beautiful-dnd)
+- [The Road to React](https://www.roadtoreact.com/)
+- [CSS Style in React](https://www.robinwieruch.de/react-css-styling/)
 - [Markdown](https://www.markdownguide.org/)
 - [Code The Dream organization](https://codethedream.org/)
 
@@ -126,7 +127,7 @@ The application will open in your default web browser at http://localhost:3000. 
 
 Special thanks and a shout out to the following individuals and organizations:
 
-- [Code the Dream](https://www.codethedream.org/) for their exceptional coding school, providing valuable learning resources and support.
+- [Code the Dream](https://www.codethedream.org/) for their exceptional coding school and amazing mentors, providing valuable learning resources and support.
 - [SVGREPO](https://www.svgrepo.com) for the icons used in this project.
 - Hat tip to anyone whose code was used.
 
