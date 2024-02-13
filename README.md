@@ -90,7 +90,7 @@ The application will open in your default web browser at http://localhost:3000. 
 
 1. Find the todo item that you want to mark completed in the list of todos.
 
-2. Select the circle on the left of the todo item to mark it as complete.
+2. Select the checkbox on the left of the todo item to mark it as complete.
 
 ### How to edit a todo item?
 
