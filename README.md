@@ -3,8 +3,8 @@
     <img alt="Todo List" src="./public/pink.svg" />
   </a>
 </p>
-<h1 align="center" style="color: #b48ead;">
-  React App: Todo List™
+<h1 align="center" style="color: #fa9291;">
+  React App: Your Busy Bee List™
 </h1>
 
 [![Follow @DoinaFitchevici](https://img.shields.io/github/followers/DoinaFitchevici?label=Follow%20@DoinaFitchevici&style=social)](https://github.com/DoinaFitchevici?screen_name=DoinaFitchevici)
