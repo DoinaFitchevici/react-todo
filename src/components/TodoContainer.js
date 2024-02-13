@@ -42,10 +42,10 @@ const TodoContainer = ({ tableName }) => {
     }
   };
 
-  const getTodos = async () => {
+  const getTodos = async (table) => {
     try {
       debugger;
-      const url = `${baseUrl}${tableName}?view=Grid%20view`;
+      const url = `${baseUrl}${table}?view=Grid%20view`;
       const data = await fetchApi({ method: "GET", url });
       debugger;
       const todos = data.records.map((todo) => ({
@@ -63,7 +63,7 @@ const TodoContainer = ({ tableName }) => {
   };
 
   useEffect(() => {
-    getTodos();
+    getTodos(tableName);
   }, [tableName]);
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const TodoContainer = ({ tableName }) => {
         body: { fields: { title: newTodo.title } },
       });
 
-      await getTodos();
+      await getTodos(tableName);
     } catch (error) {
       console.log(error);
     }
@@ -100,7 +100,7 @@ const TodoContainer = ({ tableName }) => {
           },
         },
       });
-      await getTodos();
+      await getTodos(tableName);
     } catch (error) {
       console.log(error);
     }
