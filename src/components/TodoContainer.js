@@ -15,6 +15,7 @@ const TodoContainer = ({ tableName }) => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { count, setCount } = useContext(TodoCounterContext);
+  const [currentSortField, setCurrentSortField] = useState("title");
 
   const fetchApi = async ({ method, url, headers, body }) => {
     try {
@@ -41,24 +42,28 @@ const TodoContainer = ({ tableName }) => {
     }
   };
 
-  const getTodos = async () => {
+  const getTodos = async (table) => {
     try {
-      const url = `${baseUrl}${tableName}${sortByLastModifiedTime}`;
+      debugger;
+      const url = `${baseUrl}${table}?view=Grid%20view`;
       const data = await fetchApi({ method: "GET", url });
+      debugger;
       const todos = data.records.map((todo) => ({
         title: todo.fields.title,
         id: todo.id,
-        completed: todo.fields.completed || false,
+        completeDateTime: todo.fields.completeDateTime,
+        createDateTime: todo.fields.createDateTime,
       }));
 
       setTodoList(todos);
+      updateSorts(todos, currentSortField);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getTodos();
+    getTodos(tableName);
   }, [tableName]);
 
   useEffect(() => {
@@ -75,7 +80,7 @@ const TodoContainer = ({ tableName }) => {
         body: { fields: { title: newTodo.title } },
       });
 
-      await getTodos();
+      await getTodos(tableName);
     } catch (error) {
       console.log(error);
     }
@@ -89,10 +94,13 @@ const TodoContainer = ({ tableName }) => {
         url,
         headers: { "Content-Type": "application/json" },
         body: {
-          fields: { completed: newTodo.completed, title: newTodo.title },
+          fields: {
+            completeDateTime: newTodo.completeDateTime,
+            title: newTodo.title,
+          },
         },
       });
-      await getTodos();
+      await getTodos(tableName);
     } catch (error) {
       console.log(error);
     }
@@ -120,38 +128,67 @@ const TodoContainer = ({ tableName }) => {
   };
 
   const toggleTodoCompletion = (id) => {
-    const updatedTodoList = todoList.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
+    let todo = todoList.find((itemTodo) => itemTodo.id === id);
+    todo.completeDateTime = todo.completeDateTime
+      ? null
+      : new Date().toISOString();
 
-    const sortedTodoList = updatedTodoList.sort((a, b) =>
-      a.completed === b.completed ? 0 : a.completed ? 1 : -1
-    );
-
-    setTodoList(sortedTodoList);
-    updateTodo(sortedTodoList.find((itemTodo) => itemTodo.id === id));
+    updateTodo(todo);
   };
 
   const updateNewTitle = (id, newTitle) => {
-    const updatedTodoList = todoList.map((todo) =>
-      todo.id === id ? { ...todo, title: newTitle } : todo
-    );
-
-    setTodoList(updatedTodoList);
-    updateTodo(updatedTodoList.find((itemTodo) => itemTodo.id === id));
+    let todo = todoList.find((itemTodo) => itemTodo.id === id);
+    todo.title = newTitle;
+    updateTodo(todo);
   };
 
   const reorderTodo = (newTodoList) => {
     setTodoList(newTodoList);
   };
 
+  const updateSorts = (todos, sortBy) => {
+    let sortedTodos = [];
+    if (sortBy === "title") {
+      sortedTodos = [...todos].sort((objectA, objectB) => {
+        const titleA = objectA.title.toUpperCase();
+        const titleB = objectB.title.toUpperCase();
+
+        return titleA < titleB ? -1 : titleA === titleB ? 0 : 1;
+      });
+    } else if (sortBy === "completeDateTime") {
+      sortedTodos = [...todoList].sort((objectA, objectB) => {
+        const dateA = new Date(objectA.completeDateTime);
+        const dateB = new Date(objectB.completeDateTime);
+
+        if (isNaN(dateA)) return -1;
+        if (isNaN(dateB)) return 1;
+
+        return dateA - dateB;
+      });
+    }
+    console.log(sortedTodos);
+    setTodoList(sortedTodos);
+  };
   return (
     <section style={{ position: "relative" }}>
-      <button>
-        <Link to="/" style={{ color: "black", textDecoration: "none" }}>
-          Back
-        </Link>
-      </button>
+      <span className="containerTop">
+        <button>
+          <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+            Back
+          </Link>
+        </button>
+        &nbsp;
+        <select
+          className="right-select"
+          onChange={(e) => {
+            setCurrentSortField(e.target.value);
+            updateSorts(todoList, e.target.value);
+          }}
+        >
+          <option value="title">title</option>
+          <option value="completeDateTime">completeDateTime</option>
+        </select>
+      </span>
       <h1
         style={{
           textAlign: "center",

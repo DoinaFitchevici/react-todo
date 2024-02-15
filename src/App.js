@@ -15,6 +15,7 @@ const TableChooser = () => {
   return (
     <div>
       <select
+        className="left-select"
         id="selectField"
         value={tableName}
         onChange={(event) => setTableName(event.target.value)}

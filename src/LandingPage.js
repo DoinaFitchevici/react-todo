@@ -6,8 +6,8 @@ const LandingPage = () => {
     <>
       <main>
         <div className={styles.container}>
-          <h1>Welcome to My Todo App</h1>
-          <p>Organize your tasks with ease.</p>
+          <h1>Welcome to Your Task Tracker App</h1>
+          <p>Your Guide to Productivity, One Checkmark at a Time!</p>
         </div>
         <div className={styles.buttonContainer}>
           <Link to="/TodoList" className={styles.button}>
@@ -19,7 +19,7 @@ const LandingPage = () => {
         </div>
       </main>
       <footer className={styles.footer}>
-        <p>© 2024 Your Todo App. All rights reserved.</p>
+        <p>© 2024 Your Task Tracker App. All rights reserved.</p>
       </footer>
     </>
   );

@@ -10,7 +10,7 @@ const TodoListItem = ({
   onToggleCompletion,
   onUpdateNewTitle,
 }) => {
-  const { title, id, completed } = todo;
+  const { title, id, completeDateTime } = todo;
 
   const [edit, setEdit] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
@@ -28,6 +28,12 @@ const TodoListItem = ({
     setEdit(false);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSaveClick();
+    }
+  };
+
   const inputRef = useRef();
   useEffect(() => {
     if (inputRef.current) {
@@ -41,15 +47,24 @@ const TodoListItem = ({
         <input
           className={style.checkbox}
           type="checkbox"
-          checked={completed}
+          checked={!!completeDateTime}
           onChange={() => onToggleCompletion(id)}
         />
       </div>
       <div className={style.column}>
         {edit ? (
-          <input ref={inputRef} value={newTitle} onChange={handleTitleChange} />
+          <input
+            ref={inputRef}
+            value={newTitle}
+            onChange={handleTitleChange}
+            onKeyDown={handleKeyDown}
+          />
         ) : (
-          <span className={completed ? style.completedTodo : style.ListItem}>
+          <span
+            className={
+              !!completeDateTime ? style.completedTodo : style.ListItem
+            }
+          >
             {title}
           </span>
         )}

@@ -42,6 +42,52 @@ button {
 button:hover {
   background-color: #e0bfb8;
 }
+
+.left-select {
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: "Poppins";
+  font-weight: 100;
+  font-variant: small-caps;
+  font-size: 18px;
+}
+
+.left-select:hover {
+  background-color: #e0bfb8;
+}
+
+.containerTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.right-select {
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: "Poppins";
+  font-weight: 100;
+  font-variant: small-caps;
+  font-size: 18px;
+}
+
+.right-select:hover {
+  background-color: #e0bfb8;
+}
+
 @media (max-width: 600px) {
   body {
     padding: 0px;
