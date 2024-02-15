@@ -7,10 +7,9 @@ import { Link } from "react-router-dom";
 
 const sortByLastModifiedTime =
   "?sort[0][field]=completed&sort[0][direction]=asc&sort[1][field]=lastModifiedTime&sort[1][direction]=asc";
-//"?sort%5B0%5D%5Bfield%5D=lastModifiedTime&sort%5B0%5D%5Bdirection%5D=asc";
 const baseUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/`;
 
-const TodoContainer = ({ tableName }) => {
+const TodoContainer = ({ tableName, headerTitle }) => {
   console.log(tableName);
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -194,7 +193,7 @@ const TodoContainer = ({ tableName }) => {
           textAlign: "center",
         }}
       >
-        Todo List
+        {headerTitle}
       </h1>
       <AddTodoForm onAddTodo={addTodo} />
       {isLoading && <p>Loading...</p>}

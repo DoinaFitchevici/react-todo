@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import TodoList from "./components/TodoList";
 import AddTodoForm from "./components/AddTodoForm";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { TodoCounterContext } from "./context/TodoCounterContext";
 import PropTypes from "prop-types";
 import LandingPage from "./LandingPage";
@@ -11,19 +11,17 @@ import TodoContainer from "./components/TodoContainer";
 const baseUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
 
 const TableChooser = () => {
-  const [tableName, setTableName] = useState(process.env.REACT_APP_TABLE_NAME);
+  const { tableName } = useParams();
+  const headerTitle = tableName === "list2" ? "Shopping List" : "Todo List";
   return (
     <div>
-      <select
-        className="left-select"
-        id="selectField"
-        value={tableName}
-        onChange={(event) => setTableName(event.target.value)}
-      >
-        <option value={process.env.REACT_APP_TABLE_NAME}>Todo List</option>
-        <option value="List2">List 2</option>
-      </select>
-      <TodoContainer tableName={tableName} />
+      <a href="/todolist">
+        <button>Todo List</button>
+      </a>
+      <a href="/list2">
+        <button>Shopping List</button>
+      </a>
+      <TodoContainer tableName={tableName} headerTitle={headerTitle} />
     </div>
   );
 };
@@ -32,7 +30,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/TodoList" element={<TableChooser />} />
+        <Route path="/:tableName" element={<TableChooser />} />
         <Route
           path="/NewTodoList"
           element={

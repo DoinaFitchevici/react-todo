@@ -21,7 +21,6 @@ section {
 }
 
 button {
-  position: absolute;
   top: 10px;
   left: 10px;
   cursor: pointer;
@@ -30,7 +29,6 @@ button {
   border-radius: 8px;
   box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
   box-sizing: border-box;
-  display: inline-block;
   font-family: "Poppins";
   font-weight: 100;
   font-variant: small-caps;
