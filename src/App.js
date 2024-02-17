@@ -12,7 +12,8 @@ const baseUrl = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BA
 
 const TableChooser = () => {
   const { tableName } = useParams();
-  const headerTitle = tableName === "list2" ? "Shopping List" : "Todo List";
+  const headerTitle =
+    tableName === "Shopping List" ? "Shopping List" : "Todo List";
   return (
     <div>
       <a href="/Todo List">

@@ -43,7 +43,6 @@ const TodoContainer = ({ tableName, headerTitle }) => {
 
   const getTodos = async (table) => {
     try {
-      debugger;
       const url = `${baseUrl}${table}?view=Grid%20view`;
       const data = await fetchApi({ method: "GET", url });
       debugger;
