@@ -15,10 +15,10 @@ const TableChooser = () => {
   const headerTitle = tableName === "list2" ? "Shopping List" : "Todo List";
   return (
     <div>
-      <a href="/todolist">
+      <a href="/Todo List">
         <button>Todo List</button>
       </a>
-      <a href="/list2">
+      <a href="/Shopping List">
         <button>Shopping List</button>
       </a>
       <TodoContainer tableName={tableName} headerTitle={headerTitle} />
